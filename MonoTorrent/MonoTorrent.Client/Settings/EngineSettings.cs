@@ -38,7 +38,6 @@ namespace MonoTorrent.Client
     /// <summary>
     /// Represents the Settings which need to be passed to the engine
     /// </summary>
-    [Serializable]
     public class EngineSettings : ICloneable
     {
         #region Private Fields

@@ -66,16 +66,5 @@ namespace MonoTorrent.Client
             : base(message, innerException)
         {
         }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public ListenerException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
-            : base(info, context)
-        {
-        }
     }
 }

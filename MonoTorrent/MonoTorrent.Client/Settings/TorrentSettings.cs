@@ -32,7 +32,6 @@ using System;
 
 namespace MonoTorrent.Client
 {
-    [Serializable]
     public class TorrentSettings : ICloneable
     {
         #region Member Variables
