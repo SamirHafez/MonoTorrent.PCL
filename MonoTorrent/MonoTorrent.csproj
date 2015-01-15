@@ -38,6 +38,8 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPAddress.cs" />
+    <Compile Include="IPEndPoint.cs" />
     <Compile Include="MonoTorrent.BEncoding\BEncodedDictionary.cs" />
     <Compile Include="MonoTorrent.BEncoding\BEncodedList.cs" />
     <Compile Include="MonoTorrent.BEncoding\BEncodedNumber.cs" />
