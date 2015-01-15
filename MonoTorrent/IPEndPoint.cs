@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace System.Net
 {
-    public class IPEndPoint
+    public class EndPoint { }
+
+    public class IPEndPoint : EndPoint
     {
         public IPAddress Address { get; private set; }
 
