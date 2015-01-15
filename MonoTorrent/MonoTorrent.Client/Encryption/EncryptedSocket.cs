@@ -481,8 +481,8 @@ namespace MonoTorrent.Client.Encryption
         /// <param name="decryptionSalt">The salt to calculate the decryption key with</param>
         protected void CreateCryptors(string encryptionSalt, string decryptionSalt)
         {
-            encryptor = new RC4(Hash(Encoding.ASCII.GetBytes(encryptionSalt), S, SKEY.Hash));
-            decryptor = new RC4(Hash(Encoding.ASCII.GetBytes(decryptionSalt), S, SKEY.Hash));
+            encryptor = new RC4(Hash(Encoding.UTF8.GetBytes(encryptionSalt), S, SKEY.Hash));
+            decryptor = new RC4(Hash(Encoding.UTF8.GetBytes(decryptionSalt), S, SKEY.Hash));
         }
 
         /// <summary>

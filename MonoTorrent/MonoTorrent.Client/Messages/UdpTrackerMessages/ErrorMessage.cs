@@ -57,7 +57,7 @@ namespace MonoTorrent.Client.Messages.UdpTracker
 
         public override int ByteLength
         {
-            get { return 4 + 4 + Encoding.ASCII.GetByteCount(errorMessage); }
+            get { return 4 + 4 + Encoding.UTF8.GetByteCount(errorMessage); }
         }
 
         public override void Decode(byte[] buffer, int offset, int length)

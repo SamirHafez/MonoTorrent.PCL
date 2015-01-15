@@ -595,7 +595,7 @@ namespace MonoTorrent.Client
         //        {
         //            string logFileName = owningTorrent.Torrent.Name + ".ChokeUnchoke.Log";
         //            logStream = new FileStream(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal),logFileName),FileMode.Append);
-        //            logStreamWriter = new StreamWriter(logStream, System.Text.Encoding.ASCII);
+        //            logStreamWriter = new StreamWriter(logStream, System.Text.Encoding.UTF8);
         //            logStreamWriter.AutoFlush=true;
         //        }
         //        logStreamWriter.WriteLine(DateTime.Now.ToString() + ":" + LogEntry);

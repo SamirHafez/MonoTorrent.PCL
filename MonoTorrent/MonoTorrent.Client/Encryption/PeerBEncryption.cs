@@ -62,7 +62,7 @@ namespace MonoTorrent.Client.Encryption
             {
                 base.doneReceiveY(); // 1 A->B: Diffie Hellman Ya, PadA
 
-                byte[] req1 = Hash(Encoding.ASCII.GetBytes("req1"), S);
+                byte[] req1 = Hash(Encoding.UTF8.GetBytes("req1"), S);
                 Synchronize(req1, 628); // 3 A->B: HASH('req1', S)
             }
             catch (Exception ex)
@@ -205,8 +205,8 @@ namespace MonoTorrent.Client.Encryption
             {
                 for (int i = 0; i < possibleSKEYs.Length; i++)
                 {
-                    byte[] req2 = Hash(Encoding.ASCII.GetBytes("req2"), possibleSKEYs[i].Hash);
-                    byte[] req3 = Hash(Encoding.ASCII.GetBytes("req3"), S);
+                    byte[] req2 = Hash(Encoding.UTF8.GetBytes("req2"), possibleSKEYs[i].Hash);
+                    byte[] req3 = Hash(Encoding.UTF8.GetBytes("req3"), S);
                     
                     bool match = true;
                     for (int j = 0; j < req2.Length && match; j++)

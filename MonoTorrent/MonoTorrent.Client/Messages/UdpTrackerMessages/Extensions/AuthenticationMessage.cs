@@ -19,7 +19,7 @@ namespace MonoTorrent.Client.Messages.UdpTracker
         public override void Decode(byte[] buffer, int offset, int length)
         {
             usernameLength = buffer[offset]; offset++;
-            username = Encoding.ASCII.GetString(buffer, offset, usernameLength); offset += usernameLength;
+            username = Encoding.UTF8.GetString(buffer, offset, usernameLength); offset += usernameLength;
             password = new byte[8];
             Buffer.BlockCopy(buffer, offset, password, 0, password.Length);
         }
@@ -27,7 +27,7 @@ namespace MonoTorrent.Client.Messages.UdpTracker
         public override int Encode(byte[] buffer, int offset)
         {
             int written = Write(buffer, offset, usernameLength);
-            byte[] name = Encoding.ASCII.GetBytes(username);
+            byte[] name = Encoding.UTF8.GetBytes(username);
             written += Write(buffer, offset, name, 0, name.Length);
             written += Write(buffer, offset, password, 0, password.Length);
 
