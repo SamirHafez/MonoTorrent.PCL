@@ -252,7 +252,35 @@
     <Compile Include="MonoTorrent.Common\UriHelper.cs" />
     <Compile Include="MonoTorrent.Common\UriQueryBuilder.cs" />
     <Compile Include="MonoTorrent.Common\VersionInfo.cs" />
+    <Compile Include="MonoTorrent.Tracker\EventArgs\AnnounceEventArgs.cs" />
+    <Compile Include="MonoTorrent.Tracker\EventArgs\PeerEventArgs.cs" />
+    <Compile Include="MonoTorrent.Tracker\EventArgs\ScrapeEventArgs.cs" />
+    <Compile Include="MonoTorrent.Tracker\EventArgs\TimedOutEventArgs.cs" />
+    <Compile Include="MonoTorrent.Tracker\Exceptions\TrackerException.cs" />
+    <Compile Include="MonoTorrent.Tracker\Frontend\AnnounceParameters.cs" />
+    <Compile Include="MonoTorrent.Tracker\Frontend\ScrapeParameters.cs" />
+    <Compile Include="MonoTorrent.Tracker\InfoHashTrackable.cs" />
+    <Compile Include="MonoTorrent.Tracker\IPAddressComparer.cs" />
+    <Compile Include="MonoTorrent.Tracker\ITrackable.cs" />
+    <Compile Include="MonoTorrent.Tracker\Listeners\HttpListener.cs" />
+    <Compile Include="MonoTorrent.Tracker\Listeners\ListenerBase.cs" />
+    <Compile Include="MonoTorrent.Tracker\Listeners\ManualListener.cs" />
+    <Compile Include="MonoTorrent.Tracker\Listeners\UdpListener.cs" />
+    <Compile Include="MonoTorrent.Tracker\Peer.cs" />
+    <Compile Include="MonoTorrent.Tracker\RequestMonitor.cs" />
+    <Compile Include="MonoTorrent.Tracker\RequestParameters.cs" />
+    <Compile Include="MonoTorrent.Tracker\SimpleTorrentManager.cs" />
+    <Compile Include="MonoTorrent.Tracker\Tracker.cs" />
+    <Compile Include="NameValueCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MonoTorrent.Tracker\Frontend\ChangeLog" />
+    <None Include="MonoTorrent.Tracker\Frontend\web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MonoTorrent.Tracker\Frontend\global.asax" />
+    <Content Include="MonoTorrent.Tracker\Frontend\index.aspx" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

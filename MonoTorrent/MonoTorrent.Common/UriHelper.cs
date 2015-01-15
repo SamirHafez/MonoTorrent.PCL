@@ -53,7 +53,8 @@ namespace MonoTorrent
             for (int i = 0; i < bytes.Length; i++)
                 UrlEncodeChar ((char)bytes [i], result, false);
 
-            return Encoding.UTF8.GetString (result.ToArray());
+            var resultArray = result.ToArray();
+            return Encoding.UTF8.GetString (resultArray, 0, resultArray.Length);
         }
 
         public static byte [] UrlDecode (string s)

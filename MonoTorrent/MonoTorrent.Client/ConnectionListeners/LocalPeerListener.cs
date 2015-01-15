@@ -92,7 +92,7 @@ namespace MonoTorrent.Client
             try
             {
                 byte[] receiveBytes = u.EndReceive(ar, ref e);
-                string receiveString = Encoding.UTF8.GetString(receiveBytes);
+                string receiveString = Encoding.UTF8.GetString(receiveBytes, 0, receiveBytes.Length);
 
                 Regex exp = new Regex("BT-SEARCH \\* HTTP/1.1\\r\\nHost: 239.192.152.143:6771\\r\\nPort: (?<port>[^@]+)\\r\\nInfohash: (?<hash>[^@]+)\\r\\n\\r\\n\\r\\n");
                 Match match = exp.Match(receiveString);

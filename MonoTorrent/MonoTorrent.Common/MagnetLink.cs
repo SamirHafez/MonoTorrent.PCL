@@ -70,14 +70,14 @@ namespace MonoTorrent
                     break;
                     case "tr" ://address tracker
                         var bytes = UriHelper.UrlDecode(keyval[1]);
-                        AnnounceUrls.Add(Encoding.UTF8.GetString(bytes));
+                        AnnounceUrls.Add(Encoding.UTF8.GetString(bytes, 0, bytes.Length));
                     break;
                     case "as"://Acceptable Source
                         Webseeds.Add (keyval[1]);
                     break;
                     case "dn"://display name
                         var name = UriHelper.UrlDecode(keyval[1]);
-                        Name = Encoding.UTF8.GetString(name);
+                        Name = Encoding.UTF8.GetString(name, 0, name.Length);
                     break;
                     case "xl"://exact length
                     case "xs":// eXact Source - P2P link.

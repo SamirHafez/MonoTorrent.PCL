@@ -49,7 +49,7 @@ namespace MonoTorrent.BEncoding
         /// </summary>
         public string Text
         {
-            get { return Encoding.UTF8.GetString(textBytes); }
+            get { return Encoding.UTF8.GetString(textBytes, 0, textBytes.Length); }
             set { textBytes = Encoding.UTF8.GetBytes(value); }
         }
 
@@ -242,7 +242,7 @@ namespace MonoTorrent.BEncoding
 
         public override string ToString()
         {
-            return System.Text.Encoding.UTF8.GetString(textBytes);
+            return System.Text.Encoding.UTF8.GetString(textBytes, 0, textBytes.Length);
         }
 
         #endregion

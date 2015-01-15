@@ -168,7 +168,8 @@ namespace MonoTorrent.BEncoding
 
         public override string ToString()
         {
-            return System.Text.Encoding.UTF8.GetString(Encode());
+            var encode = Encode();
+            return System.Text.Encoding.UTF8.GetString(encode, 0, encode.Length);
         }
         #endregion
 
