@@ -28,7 +28,8 @@ namespace MonoTorrent.Client
 		public static void Flush()
 		{
 			lock (listeners)
-				listeners.ForEach (delegate (TraceListener l) { l.Flush(); } );
+                foreach (TraceListener l in listeners)
+                    l.Flush();
 		}
         /*
         internal static void Log(PeerIdInternal id, string message)
@@ -74,7 +75,7 @@ namespace MonoTorrent.Client
                 else
                     sb.Append(message);
 				string s = sb.ToString();
-                listeners.ForEach(delegate(TraceListener l) { l.WriteLine(s); });
+                foreach (TraceListener l in listeners) l.WriteLine(s);
             }
         }
     }

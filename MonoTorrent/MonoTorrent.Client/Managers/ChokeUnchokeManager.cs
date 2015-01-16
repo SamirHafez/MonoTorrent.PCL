@@ -576,7 +576,8 @@ namespace MonoTorrent.Client
         private void UnchokePeerList(List<PeerId> PeerList)
         {
             //Unchoke all the peers in the supplied list
-            PeerList.ForEach(Unchoke);
+            foreach (var peer in PeerList)
+                Unchoke(peer);
         }
 
         #endregion

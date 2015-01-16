@@ -30,6 +30,10 @@ namespace MonoTorrent.Client
 
         private static bool SupportsSparse = false;
 
+        public static void CreateSparse(string filename, long length)
+        {
+        }
+
         //public static void CreateSparse(string filename, long length)
         //{
         //    if (!SupportsSparse)

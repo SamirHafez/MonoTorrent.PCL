@@ -114,7 +114,8 @@ namespace MonoTorrent.Client
 
         public void ForEach(Action<T> action)
         {
-            list.ForEach(action);
+            foreach (var item in list)
+                action(item);
         }
 
         public bool IsReadOnly

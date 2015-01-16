@@ -100,7 +100,8 @@ namespace MonoTorrent.Client
 
         public void Dispose()
         {
-            list.ForEach(delegate (TorrentFileStream s) { s.Dispose(); }); 
+            foreach (TorrentFileStream s in list)
+                s.Dispose();
             list.Clear();
         }
 

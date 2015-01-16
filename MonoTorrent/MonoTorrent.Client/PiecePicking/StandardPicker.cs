@@ -55,7 +55,7 @@ namespace MonoTorrent.Client
             }
         }
 
-        static Predicate<Block> TimedOut = delegate(Block b) { return b.RequestTimedOut; };
+        static Predicate<Block> TimedOut = delegate (Block b) { return b.RequestTimedOut; };
 
         protected SortList<Piece> requests;
 
@@ -67,7 +67,7 @@ namespace MonoTorrent.Client
 
         public override void CancelRequest(PeerId peer, int piece, int startOffset, int length)
         {
-            CancelWhere(delegate(Block b)
+            CancelWhere(delegate (Block b)
             {
                 return b.StartOffset == startOffset &&
                        b.RequestLength == length &&
@@ -78,7 +78,7 @@ namespace MonoTorrent.Client
 
         public override void CancelRequests(PeerId peer)
         {
-            CancelWhere(delegate(Block b) { return peer.Equals(b.RequestedOff); });
+            CancelWhere(delegate (Block b) { return peer.Equals(b.RequestedOff); });
         }
 
         public override void CancelTimedOutRequests()
@@ -89,22 +89,23 @@ namespace MonoTorrent.Client
         void CancelWhere(Predicate<Block> predicate)
         {
             bool cancelled = false;
-            requests.ForEach(delegate(Piece p) {
-                for (int i = 0; i < p.Blocks.Length; i++) {
-                    if (predicate(p.Blocks[i]) && !p.Blocks[i].Received) {
+            foreach (Piece p in requests)
+                for (int i = 0; i < p.Blocks.Length; i++)
+                {
+                    if (predicate(p.Blocks[i]) && !p.Blocks[i].Received)
+                    {
                         cancelled = true;
                         p.Blocks[i].CancelRequest();
                     }
                 }
-            });
 
             if (cancelled)
-                requests.RemoveAll(delegate(Piece p) { return p.NoBlocksRequested; });
+                requests.RemoveAll(delegate (Piece p) { return p.NoBlocksRequested; });
         }
 
         public override int CurrentRequestCount()
         {
-            return (int)Toolbox.Accumulate<Piece>(requests, delegate(Piece p) { return p.TotalRequested - p.TotalReceived; });
+            return (int)Toolbox.Accumulate<Piece>(requests, delegate (Piece p) { return p.TotalRequested - p.TotalReceived; });
         }
 
         public override List<Piece> ExportActiveRequests()
@@ -182,20 +183,20 @@ namespace MonoTorrent.Client
             int blockIndex = Block.IndexOf(piece.Blocks, startOffset, length);
             if (blockIndex == -1 || !id.Equals(piece.Blocks[blockIndex].RequestedOff))
             {
-                Logger.Log (null, "Validating: {0} - {1}: ", pieceIndex, startOffset);
-                Logger.Log (null, "no block");
+                Logger.Log(null, "Validating: {0} - {1}: ", pieceIndex, startOffset);
+                Logger.Log(null, "no block");
                 return false;
             }
             if (piece.Blocks[blockIndex].Received)
             {
-                Logger.Log (null, "Validating: {0} - {1}: ", pieceIndex, startOffset);
-                Logger.Log (null, "received");
+                Logger.Log(null, "Validating: {0} - {1}: ", pieceIndex, startOffset);
+                Logger.Log(null, "received");
                 return false;
             }
             if (!piece.Blocks[blockIndex].Requested)
             {
-                Logger.Log (null, "Validating: {0} - {1}: ", pieceIndex, startOffset);
-                Logger.Log (null, "not requested");
+                Logger.Log(null, "Validating: {0} - {1}: ", pieceIndex, startOffset);
+                Logger.Log(null, "not requested");
                 return false;
             }
             id.AmRequestingPiecesCount--;
@@ -317,8 +318,8 @@ namespace MonoTorrent.Client
 
         private int CanRequest(BitField bitfield, int pieceStartIndex, int pieceEndIndex, ref int pieceCount)
         {
-            int largestStart=0;
-            int largestEnd=0;
+            int largestStart = 0;
+            int largestEnd = 0;
             while ((pieceStartIndex = bitfield.FirstTrue(pieceStartIndex, pieceEndIndex)) != -1)
             {
                 int end = bitfield.FirstFalse(pieceStartIndex, pieceEndIndex);
