@@ -7,6 +7,11 @@
             get { throw new NotImplementedException(); }
         }
 
+        public static IPAddress Broadcast
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         public IPAddress(long address)
         {
 
@@ -43,6 +48,11 @@
         }
 
         public static IPAddress Parse(string addres)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static bool TryParse(string address, out IPAddress supplied)
         {
             throw new NotImplementedException();
         }

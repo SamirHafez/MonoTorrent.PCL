@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
@@ -78,9 +79,7 @@ namespace MonoTorrent.Common
 
             // Turn the full path of each file into a full path + relative path. The relative path is the 'path'
             // which the file will have within the .torrent metadata.
-            Files = files.ConvertAll<FileMapping> (delegate (string file) {
-                return new FileMapping(file, file.Substring(fullPath.Length));
-            });
+            Files = files.Select(file => new FileMapping(file, file.Substring(fullPath.Length)));
 
             // Set the torrent name (user can change it later)
             TorrentName = new DirectoryInfo(fullPath).Name;

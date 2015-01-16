@@ -30,6 +30,7 @@
 
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
@@ -122,7 +123,7 @@ namespace MonoTorrent.Common {
 
             if (getrightHttpSeeds.Count > 0) {
                 BEncodedList seedlist = new BEncodedList ();
-                seedlist.AddRange (getrightHttpSeeds.ConvertAll<BEncodedValue> (delegate (string s) { return (BEncodedString) s; }));
+                seedlist.AddRange (getrightHttpSeeds.Cast<BEncodedString>());
                 torrent ["url-list"] = seedlist;
             }
 
@@ -278,7 +279,7 @@ namespace MonoTorrent.Common {
         void CreateMultiFileTorrent (BEncodedDictionary dictionary, List<TorrentFile> mappings, PieceWriter writer, string name)
         {
             BEncodedDictionary info = (BEncodedDictionary) dictionary ["info"];
-            List<BEncodedValue> files = mappings.ConvertAll<BEncodedValue> (ToFileInfoDict);
+            List<BEncodedValue> files = mappings.Select(ToFileInfoDict).ToList();
             info.Add ("files", new BEncodedList (files));
         }
 

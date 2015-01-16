@@ -28,6 +28,7 @@
 
 
 using System;
+using System.Linq;
 using System.Text;
 using System.Net.Sockets;
 using System.Net;
@@ -222,7 +223,7 @@ namespace MonoTorrent.Client.Connections
                 }
                 else if (bundle.TrueForAll(delegate(PeerMessage m) { return m is RequestMessage; }))
                 {
-                    requestMessages.AddRange(bundle.ConvertAll<RequestMessage>(delegate(PeerMessage m) { return (RequestMessage)m; }));
+                    requestMessages.AddRange(bundle.Cast<RequestMessage>());
                     // The RequestMessages are always sequential
                     RequestMessage start = (RequestMessage)bundle[0];
                     RequestMessage end = (RequestMessage)bundle[bundle.Count - 1];
