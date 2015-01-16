@@ -7,6 +7,7 @@ using System.IO;
 using MonoTorrent.Common;
 using MonoTorrent.Client.Messages.Standard;
 using MonoTorrent.Client.PieceWriters;
+using System.Threading.Tasks;
 
 namespace MonoTorrent.Client
 {
@@ -252,7 +253,7 @@ namespace MonoTorrent.Client
 		void QueueRead(BufferedIO io, DiskIOCallback callback)
 		{
 			io.Callback = callback;
-			if (Thread.CurrentThread == IOLoop.thread) {
+            if (Task.CurrentId == IOLoop.thread.Id) {
 				PerformRead(io);
 				cache.Enqueue (io);
 			}
@@ -275,7 +276,7 @@ namespace MonoTorrent.Client
 		void QueueWrite(BufferedIO io, DiskIOCallback callback)
 		{
 			io.Callback = callback;
-			if (Thread.CurrentThread == IOLoop.thread) {
+			if (Task.CurrentId == IOLoop.thread.Id) {
 				PerformWrite(io);
 				cache.Enqueue (io);
 			}

@@ -38,6 +38,7 @@ using MonoTorrent.BEncoding;
 using MonoTorrent.Client;
 using MonoTorrent.Client.PieceWriters;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 
 namespace MonoTorrent.Common {
 
@@ -140,7 +141,7 @@ namespace MonoTorrent.Common {
                 throw new InvalidOperationException ("Two asynchronous operations cannot be executed simultaenously");
 
             asyncResult = new TorrentCreatorAsyncResult (callback, asyncState);
-            ThreadPool.QueueUserWorkItem (delegate {
+            Task.Run (delegate {
                 try {
                     asyncResult.Dictionary = (BEncodedDictionary) task ();
                 } catch (Exception ex) {

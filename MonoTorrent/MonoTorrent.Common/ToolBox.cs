@@ -34,6 +34,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Threading;
 using MonoTorrent.Client.Encryption;
+using System.Threading.Tasks;
 
 namespace MonoTorrent.Common
 {
@@ -69,7 +70,7 @@ namespace MonoTorrent.Common
             if (e == null)
                 return;
 
-            ThreadPool.QueueUserWorkItem(delegate {
+            Task.Run(delegate {
                 if (e != null)
                     e(o, args);
             });

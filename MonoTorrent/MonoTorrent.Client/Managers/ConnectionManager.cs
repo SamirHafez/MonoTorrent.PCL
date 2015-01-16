@@ -41,6 +41,7 @@ using MonoTorrent.Client.Connections;
 using MonoTorrent.Client.Messages.FastPeer;
 using MonoTorrent.Client.Messages.Standard;
 using MonoTorrent.Client.Messages.Libtorrent;
+using System.Threading.Tasks;
 
 namespace MonoTorrent.Client
 {
@@ -561,7 +562,7 @@ namespace MonoTorrent.Client
             if (PeerMessageTransferred == null)
                 return;
 
-            ThreadPool.QueueUserWorkItem(delegate
+            Task.Run(delegate
             {
                 EventHandler<PeerMessageEventArgs> h = PeerMessageTransferred;
                 if (h == null)

@@ -29,6 +29,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Mono.Ssdp.Internal
 {
@@ -64,8 +65,7 @@ namespace Mono.Ssdp.Internal
 
         public TimeoutDispatcher()
         {
-            Thread t = new Thread(TimerThread);
-            t.IsBackground = true;
+            Task t = new Task(TimerThread);
             t.Start();
         }
 
@@ -134,7 +134,7 @@ namespace Mono.Ssdp.Internal
             wait.Reset ();
         }
 
-        private void TimerThread (object state)
+        private void TimerThread ()
         {
             bool hasItem;
             TimeoutItem item = default (TimeoutItem);
