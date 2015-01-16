@@ -48,7 +48,7 @@ namespace MonoTorrent.Client.Connections
 {
     public partial class HttpConnection : IConnection
     {
-        static MethodInfo method = typeof(WebHeaderCollection).GetRuntimeMethod ("AddWithoutValidate", new Type[] { typeof(string), typeof(string) });
+        static MethodInfo method = typeof(WebHeaderCollection).GetRuntimeMethod("AddWithoutValidate", new Type[] { typeof(string), typeof(string) });
         private class HttpResult : AsyncResult
         {
             public byte[] Buffer;
@@ -69,7 +69,7 @@ namespace MonoTorrent.Client.Connections
                 this.BytesTransferred = bytes;
                 base.Complete();
             }
-		}
+        }
 
         #region Member Variables
 
@@ -80,7 +80,6 @@ namespace MonoTorrent.Client.Connections
         private Stream dataStream;
         private bool disposed;
         private AsyncCallback getResponseCallback;
-        private AsyncCallback receivedChunkCallback;
         private TorrentManager manager;
         private HttpResult receiveResult;
         private List<RequestMessage> requestMessages;
@@ -150,10 +149,9 @@ namespace MonoTorrent.Client.Connections
                 throw new ArgumentException("Scheme is not http");
 
             this.uri = uri;
-            
+
             connectionTimeout = TimeSpan.FromSeconds(10);
             getResponseCallback = ClientEngine.MainLoop.Wrap(GotResponse);
-            receivedChunkCallback = ClientEngine.MainLoop.Wrap(ReceivedChunk);
             requestMessages = new List<RequestMessage>();
             webRequests = new Queue<KeyValuePair<WebRequest, int>>();
         }
@@ -289,41 +287,6 @@ namespace MonoTorrent.Client.Connections
             return r;
         }
 
-
-
-        private void ReceivedChunk(IAsyncResult result)
-        {
-            if (disposed)
-                return;
-
-            try
-            {
-                int received = dataStream.EndRead(result);
-                if (received == 0)
-                    throw new WebException("No futher data is available");
-
-                receiveResult.BytesTransferred += received;
-                currentRequest.TotalReceived += received;
-
-                // We've received everything for this piece, so null it out
-                if (currentRequest.Complete)
-                    currentRequest = null;
-
-                totalExpected -= received;
-                receiveResult.Complete();
-            }
-            catch (Exception ex)
-            {
-                receiveResult.Complete(ex);
-            }
-            finally
-            {
-                // If there are no more requests pending, complete the Send call
-                if (currentRequest == null && requestMessages.Count == 0)
-                    RequestCompleted();
-            }
-        }
-
         private void RequestCompleted()
         {
             dataStream.Dispose();
@@ -393,7 +356,7 @@ namespace MonoTorrent.Client.Connections
                 {
                     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(u);
                     AddRange(request, startOffset, endOffset - 1);
-                    webRequests.Enqueue(new KeyValuePair<WebRequest,int>(request, (int)(endOffset - startOffset)));
+                    webRequests.Enqueue(new KeyValuePair<WebRequest, int>(request, (int)(endOffset - startOffset)));
                     endOffset = 0;
                 }
             }
@@ -467,15 +430,42 @@ namespace MonoTorrent.Client.Connections
                 currentRequest.TotalReceived += written;
             }
 
-            dataStream.Read(buffer, offset, count);
-            receivedChunkCallback()
-            dataStream.BeginRead(buffer, offset, count, receivedChunkCallback, null);
+            int received = dataStream.Read(buffer, offset, count);
+            if (disposed)
+                return;
+
+            try
+            {
+                if (received == 0)
+                    throw new WebException("No futher data is available");
+
+                receiveResult.BytesTransferred += received;
+                currentRequest.TotalReceived += received;
+
+                // We've received everything for this piece, so null it out
+                if (currentRequest.Complete)
+                    currentRequest = null;
+
+                totalExpected -= received;
+                receiveResult.Complete();
+            }
+            catch (Exception ex)
+            {
+                receiveResult.Complete(ex);
+            }
+            finally
+            {
+                // If there are no more requests pending, complete the Send call
+                if (currentRequest == null && requestMessages.Count == 0)
+                    RequestCompleted();
+            }
         }
 
         void BeginGetResponse(WebRequest request, AsyncCallback callback, object state)
         {
             IAsyncResult result = request.BeginGetResponse(callback, state);
-            ClientEngine.MainLoop.QueueTimeout(ConnectionTimeout, delegate {
+            ClientEngine.MainLoop.QueueTimeout(ConnectionTimeout, delegate
+            {
                 if (!result.IsCompleted)
                     request.Abort();
                 return false;
