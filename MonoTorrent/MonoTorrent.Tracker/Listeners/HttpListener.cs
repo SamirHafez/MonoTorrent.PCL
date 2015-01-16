@@ -128,7 +128,7 @@ namespace MonoTorrent.Tracker.Listeners
             }
             catch(Exception ex)
             {
-                Console.Write("Exception in listener: {0}{1}", Environment.NewLine, ex);
+                Debug.WriteLine("Exception in listener: {0}{1}", Environment.NewLine, ex);
             }
             finally
             {
@@ -151,9 +151,9 @@ namespace MonoTorrent.Tracker.Listeners
             BEncodedValue responseData = Handle(context.Request.RawUrl, context.Request.RemoteEndPoint.Address, isScrape);
 
             byte[] response = responseData.Encode();
-            context.Response.ContentType = "text/plain";
-            context.Response.StatusCode = 200;
-            context.Response.ContentLength64 = response.LongLength;
+            //context.Response.ContentType = "text/plain";
+            //context.Response.StatusCode = 200;
+            //context.Response.ContentLength64 = response.Length;
             context.Response.OutputStream.Write(response, 0, response.Length);
         }
 

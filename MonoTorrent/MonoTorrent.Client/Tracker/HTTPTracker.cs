@@ -84,8 +84,8 @@ namespace MonoTorrent.Client.Tracker
             {
                 Uri announceString = CreateAnnounceString(parameters);
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(announceString);
-                request.UserAgent = MonoTorrent.Common.VersionInfo.ClientVersion;
-                request.Proxy = new WebProxy();   // If i don't do this, i can't run the webrequest. It's wierd.
+                request.Headers["UserAgent"] = MonoTorrent.Common.VersionInfo.ClientVersion;
+                //request.Proxy = new WebProxy();   // If i don't do this, i can't run the webrequest. It's wierd.
                 RaiseBeforeAnnounce();
                 BeginRequest(request, AnnounceReceived, new object[] { request, state });
             }
@@ -206,7 +206,7 @@ namespace MonoTorrent.Client.Tracker
                             dataStream.Write(buffer, 0, bytesRead);
                     }
                 }
-                response.Close();
+                response.Dispose();
                 dataStream.Seek(0, SeekOrigin.Begin);
                 return (BEncodedDictionary)BEncodedValue.Decode(dataStream);
             }
@@ -292,7 +292,7 @@ namespace MonoTorrent.Client.Tracker
                     url += "&info_hash=" + parameters.InfoHash.UrlEncode ();
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                request.UserAgent = MonoTorrent.Common.VersionInfo.ClientVersion;
+                request.Headers["UserAgent"] = MonoTorrent.Common.VersionInfo.ClientVersion;
                 BeginRequest(request, ScrapeReceived, new object[] { request, state });
             }
             catch

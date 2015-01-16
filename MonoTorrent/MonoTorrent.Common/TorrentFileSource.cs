@@ -39,8 +39,8 @@ namespace MonoTorrent.Common
 
         private void LoadFiles()
         {
-            char sep = System.IO.Path.DirectorySeparatorChar;
-            string fullPath = System.IO.Path.GetFullPath (Path);
+            char sep = '\\';
+            string fullPath = System.IO.Path.GetPathRoot (Path);
             if (File.Exists (fullPath)) {
                 TorrentName = System.IO.Path.GetFileName(fullPath);
                 Files = new List<FileMapping> { new FileMapping(fullPath, TorrentName) };

@@ -160,7 +160,7 @@ namespace MonoTorrent.Client.Encryption
             r.Id.Decryptor = r.Decryptor;
             initialData = r.InitialData;
 
-            r.AsyncWaitHandle.Close();
+            r.AsyncWaitHandle.Dispose();
         }
 
         private static void HandshakeReceived(bool succeeded, int count, object state)
@@ -228,7 +228,7 @@ namespace MonoTorrent.Client.Encryption
 
             r.Complete();
 
-            result.AsyncWaitHandle.Close();
+            result.AsyncWaitHandle.Dispose();
             //r.AsyncWaitHandle.Close();
         }
     }

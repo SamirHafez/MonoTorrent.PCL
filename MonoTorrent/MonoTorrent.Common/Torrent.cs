@@ -36,6 +36,7 @@ using System.Security.Cryptography;
 using MonoTorrent.BEncoding;
 using System.Collections;
 using System.Net;
+using Windows.Storage;
 
 namespace MonoTorrent.Common
 {
@@ -409,7 +410,7 @@ namespace MonoTorrent.Common
                             foreach (BEncodedString str in ((BEncodedList)keypair.Value))
                             {
                                 sb.Append(str.Text);
-                                sb.Append(Path.DirectorySeparatorChar);
+                                sb.Append('\\');
                             }
                             path = sb.ToString(0, sb.Length - 1);
                             sb.Remove(0, sb.Length);
@@ -421,7 +422,7 @@ namespace MonoTorrent.Common
                                 foreach (BEncodedString str in ((BEncodedList)keypair.Value))
                                 {
                                     sb.Append(str.Text);
-                                    sb.Append(Path.DirectorySeparatorChar);
+                                    sb.Append('\\');
                                 }
                                 path = sb.ToString(0, sb.Length - 1);
                                 sb.Remove(0, sb.Length);
@@ -570,7 +571,7 @@ namespace MonoTorrent.Common
         {
             Check.Path(path);
 
-            using (Stream s = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+            using (Stream s = new FileStream(path, FileAccessMode.Read))
                 return Torrent.Load(s, path);
         }
 

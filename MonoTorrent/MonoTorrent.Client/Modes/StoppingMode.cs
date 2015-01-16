@@ -46,9 +46,9 @@ namespace MonoTorrent.Client
 
 		public override void Tick(int counter)
 		{
-			if (handle.WaitOne(0, true))
+			if (handle.WaitOne(0))
 			{
-				handle.Close();
+				handle.Dispose();
 				Manager.Mode = new StoppedMode(Manager);
 			}
 		}

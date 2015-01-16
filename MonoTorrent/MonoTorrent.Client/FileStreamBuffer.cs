@@ -79,13 +79,13 @@ namespace MonoTorrent.Client
                     Directory.CreateDirectory (Path.GetDirectoryName(file.FullPath));
                     SparseFile.CreateSparse (file.FullPath, file.Length);
                 }
-                s = new TorrentFileStream (file, FileMode.OpenOrCreate, access, FileShare.Read);
+                s = new TorrentFileStream (file, access);
 
                 // Ensure that we truncate existing files which are too large
                 if (s.Length > file.Length) {
                     if (!s.CanWrite) {
-                        s.Close();
-                        s = new TorrentFileStream(file, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read);
+                        s.Dispose();
+                        s = new TorrentFileStream(file, FileAccessMode.ReadWrite);
                     }
                     s.SetLength(file.Length);
                 }

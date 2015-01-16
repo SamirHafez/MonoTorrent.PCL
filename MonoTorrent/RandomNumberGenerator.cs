@@ -11,5 +11,10 @@
         {
             throw new NotImplementedException();
         }
+
+        internal static RandomNumberGenerator Create()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

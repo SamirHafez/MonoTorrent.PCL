@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
 using MonoTorrent.Common;
+using System.IO;
 using Windows.Storage;
 
 namespace MonoTorrent.Client
 {
-    internal class TorrentFileStream
+    internal class TorrentFileStream : FileStream
     {
         TorrentFile file;
 
@@ -20,7 +17,6 @@ namespace MonoTorrent.Client
         {
             get { return file.FullPath; }
         }
-
 
         public TorrentFileStream(TorrentFile file, FileAccessMode access)
         {

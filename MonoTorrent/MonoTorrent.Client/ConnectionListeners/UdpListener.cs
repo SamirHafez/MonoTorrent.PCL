@@ -69,7 +69,7 @@ namespace MonoTorrent
                 // If the destination computer closes the connection
                 // we get error code 10054. We need to keep receiving on
                 // the socket until we clear all the error states
-                if (ex.ErrorCode == 10054)
+                if (ex.HResult == 10054)
                 {
                     while (true)
                     {
@@ -84,7 +84,7 @@ namespace MonoTorrent
                         }
                         catch (SocketException e)
                         {
-                            if (e.ErrorCode != 10054)
+                            if (e.HResult != 10054)
                                 return;
                         }
                     }

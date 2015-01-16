@@ -279,7 +279,7 @@ namespace MonoTorrent.Client
 
             if (id.ExtensionSupports.Supports(LTMetadata.Support.Name))
             {
-                stream = new MemoryStream(new byte[message.MetadataSize], 0, message.MetadataSize, true, true);
+                stream = new MemoryStream(new byte[message.MetadataSize], 0, message.MetadataSize, true);
                 int size = message.MetadataSize % LTMetadata.BlockSize;
                 if (size > 0)
                     size = 1;

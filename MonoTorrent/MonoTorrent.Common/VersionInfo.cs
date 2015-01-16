@@ -29,6 +29,7 @@
 
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -54,8 +55,8 @@ namespace MonoTorrent.Common
 		static string CreateClientVersion ()
 		{
 			AssemblyInformationalVersionAttribute versionAttr;
-			Assembly assembly = Assembly.GetExecutingAssembly ();
-			versionAttr = (AssemblyInformationalVersionAttribute) assembly.GetCustomAttributes (typeof (AssemblyInformationalVersionAttribute), false)[0];
+            Assembly assembly = typeof(VersionInfo).GetTypeInfo().Assembly;
+            versionAttr = assembly.GetCustomAttributes<AssemblyInformationalVersionAttribute>().First();
 			Version = new Version(versionAttr.InformationalVersion);
 
 			    // 'MO' for MonoTorrent then four digit version number

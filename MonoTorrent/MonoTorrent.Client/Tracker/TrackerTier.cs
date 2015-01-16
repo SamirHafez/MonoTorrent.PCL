@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Collections;
 using MonoTorrent.Common;
+using System.Diagnostics;
 
 namespace MonoTorrent.Client.Tracker
 {
@@ -62,7 +63,7 @@ namespace MonoTorrent.Client.Tracker
                 }
                 else
                 {
-                    Console.Error.WriteLine("Unsupported protocol {0}", result);                // FIXME: Debug spew?
+                    Debug.WriteLine("Unsupported protocol {0}", result);                // FIXME: Debug spew?
                 }
             }
 

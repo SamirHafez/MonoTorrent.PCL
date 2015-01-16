@@ -384,7 +384,7 @@ namespace MonoTorrent.Client
             IOLoop.QueueWait (delegate {
                 try
                 {
-                    path = Path.GetFullPath (path);
+                    path = Path.GetPathRoot (path);
                     writer.Move (file.FullPath, path, false);
                     file.FullPath = path;
                 }

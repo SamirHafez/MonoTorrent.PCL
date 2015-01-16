@@ -141,7 +141,7 @@ namespace Mono.Ssdp.Internal
             
             while (true) {
                 if (disposed) {
-                    wait.Close();
+                    wait.Dispose();
                     return;
                 }
 
@@ -156,7 +156,7 @@ namespace Mono.Ssdp.Internal
                     interval = TimeSpan.Zero;
                 }
 
-                if (!wait.WaitOne (interval, false) && hasItem) {
+                if (!wait.WaitOne (interval) && hasItem) {
                     bool requeue = item.Handler (item.State, ref item.Timeout);
                     lock (timeouts) {
                         Remove(item.Id);
@@ -190,7 +190,7 @@ namespace Mono.Ssdp.Internal
                 return;
             }
             Clear ();
-            wait.Close ();
+            wait.Dispose ();
             disposed = true;
         }
     }

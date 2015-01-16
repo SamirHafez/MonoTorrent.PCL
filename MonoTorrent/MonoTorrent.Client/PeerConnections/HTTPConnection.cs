@@ -48,8 +48,7 @@ namespace MonoTorrent.Client.Connections
 {
     public partial class HttpConnection : IConnection
     {
-        static MethodInfo method = typeof(WebHeaderCollection).GetMethod
-                                ("AddWithoutValidate", BindingFlags.Instance | BindingFlags.NonPublic);
+        static MethodInfo method = typeof(WebHeaderCollection).GetRuntimeMethod ("AddWithoutValidate", new Type[] { typeof(string), typeof(string) });
         private class HttpResult : AsyncResult
         {
             public byte[] Buffer;
@@ -468,6 +467,8 @@ namespace MonoTorrent.Client.Connections
                 currentRequest.TotalReceived += written;
             }
 
+            dataStream.Read(buffer, offset, count);
+            receivedChunkCallback()
             dataStream.BeginRead(buffer, offset, count, receivedChunkCallback, null);
         }
 
