@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using MonoTorrent.Common;
 using System.IO;
+using Windows.Storage;
 
 namespace MonoTorrent.Client
 {
@@ -50,14 +51,14 @@ namespace MonoTorrent.Client
             return null;
         }
 
-        internal TorrentFileStream GetStream(TorrentFile file, FileAccess access)
+        internal TorrentFileStream GetStream(TorrentFile file, FileAccessMode access)
         {
             TorrentFileStream s = FindStream(file.FullPath);
 
             if (s != null)
             {
                 // If we are requesting write access and the current stream does not have it
-                if (((access & FileAccess.Write) == FileAccess.Write) && !s.CanWrite)
+                if (((access & FileAccessMode.ReadWrite) == FileAccessMode.ReadWrite) && !s.CanWrite)
                 {
                     Logger.Log (null, "Didn't have write permission - reopening");
                     CloseAndRemove(s);

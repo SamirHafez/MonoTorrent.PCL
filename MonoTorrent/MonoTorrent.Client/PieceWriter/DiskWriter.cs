@@ -4,6 +4,7 @@ using System.Text;
 using MonoTorrent.Common;
 using System.IO;
 using System.Threading;
+using Windows.Storage;
 
 namespace MonoTorrent.Client.PieceWriters
 {
@@ -38,7 +39,7 @@ namespace MonoTorrent.Client.PieceWriters
             base.Dispose();
         }
 
-        internal TorrentFileStream GetStream(TorrentFile file, FileAccess access)
+        internal TorrentFileStream GetStream(TorrentFile file, FileAccessMode access)
         {
             return streamsBuffer.GetStream(file, access);
         }
