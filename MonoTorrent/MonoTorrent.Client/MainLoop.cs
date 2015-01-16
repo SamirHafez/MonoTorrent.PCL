@@ -33,6 +33,7 @@ using System.Text;
 using System.Threading;
 using Mono.Ssdp.Internal;
 using MonoTorrent.Common;
+using System.Threading.Tasks;
 
 namespace MonoTorrent.Client
 {
@@ -147,12 +148,11 @@ namespace MonoTorrent.Client
         AutoResetEvent handle = new AutoResetEvent(false);
         ICache<DelegateTask> cache = new Cache<DelegateTask>(true).Synchronize();
         Queue<DelegateTask> tasks = new Queue<DelegateTask>();
-        internal Thread thread;
+        internal Task thread;
 
         public MainLoop(string name)
         {
-            thread = new Thread(Loop);
-            thread.IsBackground = true;
+            thread = new Task(Loop);
             thread.Start();
         }
 
@@ -237,7 +237,7 @@ namespace MonoTorrent.Client
         {
             t.WaitHandle.Reset();
             t.IsBlocking = true;
-            if (Thread.CurrentThread == thread)
+            if (Task.CurrentId == thread.Id)
                 t.Execute();
             else
                 Queue(t, Priority.Highest);
