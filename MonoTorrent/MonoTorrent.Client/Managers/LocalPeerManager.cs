@@ -31,7 +31,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Timers;
 using MonoTorrent;
 using MonoTorrent.Common;
 using MonoTorrent.Client;

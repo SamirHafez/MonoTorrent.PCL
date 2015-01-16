@@ -32,7 +32,6 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Timers;
 using System.Threading;
 using MonoTorrent;
 using MonoTorrent.Common;
