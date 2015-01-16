@@ -18,27 +18,27 @@ namespace System.Net
             throw new NotImplementedException();
         }
 
-        public int HostToNetworkOrder(int order)
+        public static int HostToNetworkOrder(int order)
         {
             throw new NotImplementedException();
         }
 
-        public int NetworkToHostOrder(int order)
+        public static int NetworkToHostOrder(int order)
         {
             throw new NotImplementedException();
         }
 
-        public short HostToNetworkOrder(short order)
+        public static short HostToNetworkOrder(short order)
         {
             throw new NotImplementedException();
         }
 
-        public long NetworkToHostOrder(long order)
+        public static long NetworkToHostOrder(long order)
         {
             throw new NotImplementedException();
         }
 
-        public short NetworkToHostOrder(short order)
+        public static short NetworkToHostOrder(short order)
         {
             throw new NotImplementedException();
         }

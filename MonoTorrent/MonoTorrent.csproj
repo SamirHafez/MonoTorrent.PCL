@@ -38,6 +38,7 @@
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HashAlgorithm.cs" />
     <Compile Include="ICloneable.cs" />
     <Compile Include="IPAddress.cs" />
     <Compile Include="IPEndPoint.cs" />
@@ -276,6 +277,7 @@
     <Compile Include="MonoTorrent.Tracker\Tracker.cs" />
     <Compile Include="NameValueCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SHA1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MonoTorrent.Tracker\Frontend\ChangeLog" />
