@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace System.Net
+﻿namespace System.Net
 {
     public class IPAddress
     {
+        public static IPAddress Any
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         public IPAddress(long address)
         {
 
