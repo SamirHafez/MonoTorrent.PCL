@@ -22,10 +22,11 @@ namespace MonoTorrent.Client
             names.Add (name);
         }
 
-        public override void Close ()
+        public new void Dispose ()
         {
             for (int i = 0; i < handles.Count; i++)
-                handles [i].Close ();
+                handles [i].Dispose ();
+            base.Dispose();
         }
 
         public override bool WaitOne()
@@ -47,20 +48,6 @@ namespace MonoTorrent.Client
             if (handles.Count == 0)
                 return true;
             return WaitHandle.WaitAll (handles.ToArray (), timeout);
-        }
-
-        public override bool WaitOne(int millisecondsTimeout, bool exitContext)
-        {
-            if (handles.Count == 0)
-                return true;
-            return WaitHandle.WaitAll (handles.ToArray (), millisecondsTimeout, exitContext);
-        }
-
-        public override bool WaitOne(TimeSpan timeout, bool exitContext)
-        {
-            if (handles.Count == 0)
-                return true;
-            return WaitHandle.WaitAll (handles.ToArray (), timeout, exitContext);
         }
 
         public override string ToString()
