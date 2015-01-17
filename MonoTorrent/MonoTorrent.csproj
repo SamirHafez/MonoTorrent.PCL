@@ -40,6 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressFamily.cs" />
+    <Compile Include="BanLists\BanList.cs" />
+    <Compile Include="BanLists\ListParser.cs" />
+    <Compile Include="BanLists\RangeCollection.cs" />
     <Compile Include="Directory.cs" />
     <Compile Include="DirectoryInfo.cs" />
     <Compile Include="File.cs" />
