@@ -2,20 +2,16 @@
 {
     public class UdpClient
     {
-        public Socket Client
-        {
-            get { throw new NotImplementedException(); }
-        }
+        private AddressFamily family;
+
+        public Socket Client { get; private set; }
 
         public UdpClient(int port)
         {
             throw new NotImplementedException();
         }
 
-        public UdpClient()
-        {
-            throw new NotImplementedException();
-        }
+        public UdpClient() : this(AddressFamily.InterNetwork) { }
 
         public UdpClient(string host, int port)
         {
@@ -25,6 +21,13 @@
         public UdpClient(IPEndPoint endpoint)
         {
             throw new NotImplementedException();
+        }
+
+        public UdpClient(AddressFamily addressFamily)
+        {
+            this.family = addressFamily;
+
+            Client = new Socket(family, SocketType.Dgram, ProtocolType.Udp);
         }
 
         internal void JoinMulticastGroup(IPAddress multicastIpAddress)

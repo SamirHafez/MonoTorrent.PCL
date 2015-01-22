@@ -5,10 +5,7 @@
         private long m_Address;
 
         public static readonly IPAddress Any = new IPAddress(0x0000000000000000);
-        public static IPAddress Broadcast
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public static readonly IPAddress Broadcast = new IPAddress(0x00000000FFFFFFFF);
 
         public IPAddress(long newAddress)
         {

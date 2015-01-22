@@ -2,6 +2,7 @@
 {
     public enum SocketType
     {
-        Stream = 1
+        Stream = 1,
+        Dgram = 2
     }
 }
