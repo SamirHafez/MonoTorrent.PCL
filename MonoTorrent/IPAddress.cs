@@ -2,19 +2,20 @@
 {
     public class IPAddress
     {
-        public static IPAddress Any
-        {
-            get { throw new NotImplementedException(); }
-        }
+        private long m_Address;
 
+        public static readonly IPAddress Any = new IPAddress(0x0000000000000000);
         public static IPAddress Broadcast
         {
             get { throw new NotImplementedException(); }
         }
 
-        public IPAddress(long address)
+        public IPAddress(long newAddress)
         {
-
+            if (newAddress<0 || newAddress>0x00000000FFFFFFFF) {
+                throw new ArgumentOutOfRangeException("newAddress");
+            }
+            m_Address = newAddress;
         }
 
         public byte[] GetAddressBytes()
