@@ -1,21 +1,10 @@
-﻿using Windows.Networking.Sockets;
-namespace System.Net.Sockets
+﻿namespace System.Net.Sockets
 {
     public class Socket
     {
-        ProtocolType protocol;
-        DatagramSocket datagramSocket;
-
-        public Socket(AddressFamily family, SocketType stocketType, ProtocolType protocol)
+        public Socket(AddressFamily interNetwork, SocketType stream, ProtocolType tcp)
         {
-            this.protocol = protocol;
-
-            switch (protocol)
-            {
-            case ProtocolType.Udp:
-                datagramSocket = new DatagramSocket();
-                break;
-            }
+            throw new NotImplementedException();
         }
 
         public bool Connected

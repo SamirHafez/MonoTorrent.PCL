@@ -2,7 +2,6 @@
 {
     public enum ProtocolType
     {
-        Tcp = 6,
-        Udp
+        Tcp = 6
     }
 }
